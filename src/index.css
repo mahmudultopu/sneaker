@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-sans: 'Figtree', 'Inter', system-ui, sans-serif;
+
+  --color-brown-dark: #2a1f14;
+  --color-brown-footer: #211810;
+  --color-brown-btn: #7a5634;
+  --color-brown-soft: #3a2c1f;
+  --color-hero: #8a7560;
+  --color-cream: #f3e7d6;
+  --color-beige: #eae0d5;
+  --color-card: #f2f2f2;
+  --color-muted: #7a7a7a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white font-sans text-brown-dark antialiased;
+}
+
+.font-display {
+  font-variation-settings: 'opsz' 36, 'SOFT' 100;
+  letter-spacing: -0.02em;
+}
+
+.container-x {
+  @apply mx-auto w-full max-w-[1200px] px-4 sm:px-10;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-[10px] font-sans text-[15px] font-semibold transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brown-btn;
+}
+
+.img-zoom {
+  @apply transition-transform duration-300 ease-out group-hover:scale-[1.04];
+}
+
+@keyframes pop {
+  0% { transform: scale(0.6); }
+  60% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
