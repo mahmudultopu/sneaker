@@ -1,65 +1,144 @@
+/* load Tailwind utilities */
 @import 'tailwindcss';
 
+/* design tokens: Tailwind turns these into classes like bg-cream, font-display */
 @theme {
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-sans: 'Figtree', 'Inter', system-ui, sans-serif;
+  /* heading font */
+  --font-display: 'Fraunces Variable', Georgia, serif;
+  /* body and UI font */
+  --font-sans: 'Figtree Variable', system-ui, sans-serif;
 
+  /* heading text and dark buttons */
   --color-brown-dark: #2a1f14;
+  /* footer and drawer background */
   --color-brown-footer: #211810;
+  /* main "Buy Now" button */
   --color-brown-btn: #7a5634;
+  /* soft dark brown for pills and inputs */
   --color-brown-soft: #3a2c1f;
+  /* warm taupe hero background */
   --color-hero: #8a7560;
+  /* cream text and light buttons */
   --color-cream: #f3e7d6;
+  /* beige secondary buttons and tags */
   --color-beige: #eae0d5;
+  /* product image tile */
   --color-card: #f2f2f2;
-  --color-muted: #7a7a7a;
+  /* muted paragraph text */
+  --color-muted: #6f6a64;
 }
 
+/* smooth scrolling when jumping to a section */
 html {
   scroll-behavior: smooth;
+  /* leave room under the fixed navbar when jumping to a section */
+  scroll-padding-top: 88px;
 }
 
+/* page defaults */
 body {
+  /* white page, body font, dark text, smoother font rendering */
   @apply bg-white font-sans text-brown-dark antialiased;
 }
 
+/* heading style shared by every big serif title */
 .font-display {
+  /* chunky, soft letter shapes like the reference design */
   font-variation-settings: 'opsz' 36, 'SOFT' 100;
+  /* slightly tighter letters */
   letter-spacing: -0.02em;
 }
 
+/* centered page width with side gutters */
 .container-x {
+  /* 1200px max, 16px gutter on phones, 40px on larger screens */
   @apply mx-auto w-full max-w-[1200px] px-4 sm:px-10;
 }
 
+/* base button look */
 .btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-[10px] font-sans text-[15px] font-semibold transition duration-300 ease-out hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brown-btn;
+  /* layout, rounded corners, text style, lift-on-hover and keyboard focus ring */
+  @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-[10px] font-sans text-[15px] font-semibold transition duration-300 ease-out select-none hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-50;
 }
 
+/* visible focus outline for keyboard users on every interactive element */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  /* thick brown outline with a small gap */
+  outline: 2px solid var(--color-brown-btn);
+  /* gap between element and outline */
+  outline-offset: 3px;
+}
+
+/* gentle zoom on images inside hovered cards */
 .img-zoom {
-  @apply transition-transform duration-300 ease-out group-hover:scale-[1.04];
+  /* 4% zoom over 500ms */
+  @apply transition-transform duration-500 ease-out group-hover:scale-[1.04];
 }
 
+/* text input look used in forms */
+.field {
+  /* full width, soft border, rounded, padded */
+  @apply w-full rounded-[10px] border border-[#ddd3c7] bg-white px-4 py-3 text-[15px] text-brown-dark placeholder:text-[#a59b90] focus:border-brown-btn focus:outline-none;
+}
+
+/* little bounce when the cart count changes */
 @keyframes pop {
+  /* start small */
   0% { transform: scale(0.6); }
+  /* overshoot */
   60% { transform: scale(1.25); }
+  /* settle */
   100% { transform: scale(1); }
 }
 
-/* scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+/* slide-up animation for toasts */
+@keyframes toast-in {
+  /* start lower and invisible */
+  from { opacity: 0; transform: translateY(12px); }
+  /* end in place */
+  to { opacity: 1; transform: none; }
 }
+
+/* hero progress bar fills from left to right */
+@keyframes grow {
+  /* empty */
+  from { transform: scaleX(0); }
+  /* full */
+  to { transform: scaleX(1); }
+}
+
+/* fade animation for modals */
+@keyframes fade-in {
+  /* invisible */
+  from { opacity: 0; }
+  /* visible */
+  to { opacity: 1; }
+}
+
+/* scroll reveal: sections start hidden and lower */
+.reveal {
+  /* hidden */
+  opacity: 0;
+  /* 24px lower */
+  transform: translateY(24px);
+  /* animate into place */
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* added by JavaScript when the section scrolls into view */
 .reveal.is-visible {
+  /* fully visible */
   opacity: 1;
+  /* back in place */
   transform: none;
 }
+
+/* respect visitors who turned off animations in their system settings */
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
+  /* no smooth scrolling */
+  html { scroll-behavior: auto; }
+  /* show sections immediately */
+  .reveal { opacity: 1; transform: none; transition: none; }
+  /* stop all other animations */
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
 }

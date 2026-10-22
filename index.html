@@ -1,18 +1,35 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- character encoding for the page -->
     <meta charset="UTF-8" />
+    <!-- makes the layout scale correctly on phones -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conwerse — Sneakers That Defy Your Everyday Look</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Figtree:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- browser tab title -->
+    <title>Conwerse | Authentic Sneakers for Everyday Style</title>
+    <!-- short summary shown by search engines -->
+    <meta name="description" content="Shop authentic sneakers at Conwerse. New drops, summer collections and everyday classics built for style and comfort." />
+    <!-- colors the browser bar on mobile -->
+    <meta name="theme-color" content="#211810" />
+    <!-- tab icon, served from our own domain -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- preview card when the link is shared on social apps -->
+    <meta property="og:title" content="Conwerse | Authentic Sneakers" />
+    <!-- preview card description -->
+    <meta property="og:description" content="New drops, summer collections and everyday classics." />
+    <!-- preview card image -->
+    <meta property="og:image" content="/images/hero-1.webp" />
+    <!-- preview card type -->
+    <meta property="og:type" content="website" />
+    <!-- preload the first hero image so the top of the page appears faster -->
+    <link rel="preload" as="image" href="/images/hero-1.webp" />
   </head>
   <body>
+    <!-- message for visitors with JavaScript turned off -->
+    <noscript>Please enable JavaScript to shop at Conwerse.</noscript>
+    <!-- React mounts the whole app here -->
     <div id="root"></div>
+    <!-- app entry file -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
